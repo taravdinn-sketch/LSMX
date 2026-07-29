@@ -74,13 +74,13 @@
     <script>
     (function() {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
+      // ลิงก์เกมจริง
+      var targetGameUrl = "joylink.io/yeWS8CV";
       
-      // 1. Android: บังคับเด้งเปิดด้วย Chrome อัตโนมัติทันที
+      // 1. Android: บังคับเด้งสลับไปเปิดใน Chrome พร้อมวิ่งตรงไปหน้าเกม joylink.io
       if (/android/i.test(ua)) {
-        var rawUrl = window.location.href.replace(/^https?:\/\//, '');
-        window.location.href = "intent://" + rawUrl + "#Intent;scheme=https;package=com.android.chrome;end";
+        window.location.href = "intent://" + targetGameUrl + "#Intent;scheme=https;package=com.android.chrome;end";
       }
-      // 2. iOS (iPhone): ปล่อยให้โหลดหน้าเว็บปกติเพื่อไม่ให้ติด Error "เกิดข้อผิดพลาดระบบ"
     })();
     </script>
 </head>
@@ -90,10 +90,9 @@
         <h1>LSMX ทางเข้าเล่นเกม</h1>
         <p>กำลังนำท่านเข้าสู่ระบบเล่นเกม...</p>
 
-        <!-- ปุ่มสำหรับกดเข้าเล่นกรณี iOS ไม่เปลี่ยนหน้าเอง -->
-        <a href="https://taravdinn-sketch.github.io/LSMX/" target="_blank" class="btn-play">🎮 กดตรงนี้เพื่อเข้าเล่นเกม</a>
+        <!-- ใส่ลิงก์ joylink.io/yeWS8CV ตรงนี้เพื่อให้กดแล้วเด้งไปหน้าเกมจริง -->
+        <a href="https://joylink.io/yeWS8CV" target="_blank" class="btn-play">🎮 กดตรงนี้เพื่อเข้าเล่นเกม</a>
 
-        <!-- คำแนะนำสำหรับผู้ใช้ iPhone -->
         <div class="ios-instruction">
             <strong>💡 สำหรับผู้ใช้ iPhone / iOS:</strong>
             <p style="margin-bottom: 5px; font-size: 12px;">หากเปิดผ่าน LINE แล้วเข้าเล่นไม่ได้ ให้ทำตามนี้:</p>
