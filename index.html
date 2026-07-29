@@ -3,54 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LSMX</title>
+    <title>LSMX - ทางเข้าเล่นเกม</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            text-align: center;
-            padding: 50px 20px;
-            background-color: #f8f9fa;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        .btn-safari {
-            display: inline-block;
-            background-color: #007aff;
-            color: white;
-            padding: 15px 25px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 10px;
-            margin-top: 20px;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: #1e1e1e;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+        h1 {
+            font-size: 22px;
+            color: #f5a623;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        .btn-play {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #ff9900, #ff5500);
+            color: #fff;
+            padding: 16px;
+            border-radius: 12px;
             font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.4);
+            margin-bottom: 20px;
+        }
+        .ios-instruction {
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 13px;
+            color: #aaa;
+            text-align: left;
+            border-left: 4px solid #007aff;
+        }
+        .ios-instruction ol {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+        .ios-instruction li {
+            margin-bottom: 5px;
         }
     </style>
     <script>
     (function() {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
       
-      // 1. ถ้าเป็น Android บังคับเปิดด้วย Chrome
+      // 1. Android: บังคับเด้งเปิดด้วย Chrome อัตโนมัติทันที
       if (/android/i.test(ua)) {
         var rawUrl = window.location.href.replace(/^https?:\/\//, '');
         window.location.href = "intent://" + rawUrl + "#Intent;scheme=https;package=com.android.chrome;end";
-      } 
-      // 2. ถ้าเป็น iOS (iPhone/iPad) ที่เปิดในแอป LINE / Facebook
-      else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-        var isInApp = /LINE|FBAN|FBAV|Instagram|Twitter|TikTok/i.test(ua);
-        if (isInApp) {
-          // ใช้เทคนิคยิง Blob เพื่อให้ iOS ถามเปิดใน Safari (แก้ปัญหาขึ้น เกิดข้อผิดพลาดระบบ)
-          try {
-            var req = new XMLHttpRequest();
-            req.open('GET', window.location.href, false);
-            req.send();
-          } catch(e) {}
-        }
       }
+      // 2. iOS (iPhone): ปล่อยให้โหลดหน้าเว็บปกติเพื่อไม่ให้ติด Error "เกิดข้อผิดพลาดระบบ"
     })();
     </script>
 </head>
 <body>
-    <h2>กำลังนำท่านเข้าสู่ระบบ...</h2>
-    <p>หากระบบไม่เปิดอัตโนมัติ กรุณากดปุ่มด้านล่าง หรือกด <b>"..."</b> มุมขวาบนแล้วเลือก <b>"เปิดใน Safari" (Open in Safari)</b></p>
-    
-    <a href="https://taravdinn-sketch.github.io/LSMX/" target="_blank" class="btn-safari">เข้าสู่เว็บไซต์</a>
+
+    <div class="container">
+        <h1>LSMX ทางเข้าเล่นเกม</h1>
+        <p>กำลังนำท่านเข้าสู่ระบบเล่นเกม...</p>
+
+        <!-- ปุ่มสำหรับกดเข้าเล่นกรณี iOS ไม่เปลี่ยนหน้าเอง -->
+        <a href="https://taravdinn-sketch.github.io/LSMX/" target="_blank" class="btn-play">🎮 กดตรงนี้เพื่อเข้าเล่นเกม</a>
+
+        <!-- คำแนะนำสำหรับผู้ใช้ iPhone -->
+        <div class="ios-instruction">
+            <strong>💡 สำหรับผู้ใช้ iPhone / iOS:</strong>
+            <p style="margin-bottom: 5px; font-size: 12px;">หากเปิดผ่าน LINE แล้วเข้าเล่นไม่ได้ ให้ทำตามนี้:</p>
+            <ol>
+                <li>กดปุ่ม <b>"..." (3 จุด)</b> ที่มุมขวาบนของหน้าจอ</li>
+                <li>เลือก <b>"เปิดใน Safari" (Open in Safari)</b></li>
+            </ol>
+        </div>
+    </div>
+
 </body>
 </html>
