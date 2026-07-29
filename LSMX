@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script>
+        var isAndroid = /Android/i.test(navigator.userAgent);
+        var targetUrl = "https://lsmx19.l6t.lsmview.com";
+
+        if (isAndroid) {
+            window.location.href = "intent://" + targetUrl.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end";
+        } else {
+            window.location.href = targetUrl;
+        }
+    </script>
+</head>
+<body>
+    <p>กำลังนำท่านเข้าสู่ระบบ...</p>
+</body>
+</html>
