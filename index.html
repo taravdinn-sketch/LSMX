@@ -4,24 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LSMX</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #f8f9fa;
+        }
+        .btn-safari {
+            display: inline-block;
+            background-color: #007aff;
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
     <script>
     (function() {
-      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-      // 1. ตรวจสอบ Android
-      if (/android/i.test(userAgent)) {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      
+      // 1. ถ้าเป็น Android บังคับเปิดด้วย Chrome
+      if (/android/i.test(ua)) {
         var rawUrl = window.location.href.replace(/^https?:\/\//, '');
-        // บังคับเปิดด้วย Chrome บน Android
         window.location.href = "intent://" + rawUrl + "#Intent;scheme=https;package=com.android.chrome;end";
       } 
-      // 2. ตรวจสอบ iOS (iPhone/iPad)
-      else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        var isInApp = /LINE|FBAN|FBAV|Instagram|Twitter|TikTok/i.test(userAgent);
-        
-        // หากเปิดจากแอป LINE บน iOS บังคับเด้งออกไปเบราว์เซอร์หลัก
-        if (/LINE/i.test(userAgent)) {
-          var currentUrl = window.location.href;
-          window.location.href = "line://app/openURL?url=" + encodeURIComponent(currentUrl);
+      // 2. ถ้าเป็น iOS (iPhone/iPad) ที่เปิดในแอป LINE / Facebook
+      else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+        var isInApp = /LINE|FBAN|FBAV|Instagram|Twitter|TikTok/i.test(ua);
+        if (isInApp) {
+          // ใช้เทคนิคยิง Blob เพื่อให้ iOS ถามเปิดใน Safari (แก้ปัญหาขึ้น เกิดข้อผิดพลาดระบบ)
+          try {
+            var req = new XMLHttpRequest();
+            req.open('GET', window.location.href, false);
+            req.send();
+          } catch(e) {}
         }
       }
     })();
@@ -29,6 +49,8 @@
 </head>
 <body>
     <h2>กำลังนำท่านเข้าสู่ระบบ...</h2>
-    <p>หากหน้าจอไม่เปลี่ยน กรุณากดเปิดในเบราว์เซอร์หลัก (Safari / Chrome)</p>
+    <p>หากระบบไม่เปิดอัตโนมัติ กรุณากดปุ่มด้านล่าง หรือกด <b>"..."</b> มุมขวาบนแล้วเลือก <b>"เปิดใน Safari" (Open in Safari)</b></p>
+    
+    <a href="https://taravdinn-sketch.github.io/LSMX/" target="_blank" class="btn-safari">เข้าสู่เว็บไซต์</a>
 </body>
 </html>
